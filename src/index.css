@@ -1,0 +1,104 @@
+
+
+
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: var(--color-primary-val);
+  --color-secondary: var(--color-secondary-val);
+  --color-accent: var(--color-accent-val);
+  --color-background-custom: var(--color-background-val);
+  --color-surface: var(--color-surface-val);
+  --color-surface-secondary: var(--color-surface-secondary-val);
+  --color-border-custom: var(--color-border-val);
+  --color-text-primary: var(--color-text-primary-val);
+  --color-text-secondary: var(--color-text-secondary-val);
+  --color-text-muted: var(--color-text-muted-val);
+
+  /* Added mappings for dashboard widgets & component elements */
+  --color-card: var(--color-surface-val);
+  --color-border: var(--color-border-val);
+  --color-muted-foreground: var(--color-text-secondary-val);
+}
+
+:root, .light {
+  --color-primary-val: #6D5DFB;
+  --color-secondary-val: #8B5CF6;
+  --color-accent-val: #4F46E5;
+  --color-background-val: #F8FAFC;
+  --color-surface-val: #FFFFFF;
+  --color-surface-secondary-val: #F1F5F9;
+  --color-border-val: #E2E8F0;
+  --color-text-primary-val: #0F172A;
+  --color-text-secondary-val: #475569;
+  --color-text-muted-val: #94A3B8;
+}
+
+.dark {
+  --color-primary-val: #8B5CF6;
+  --color-secondary-val: #A78BFA;
+  --color-accent-val: #7C3AED;
+  --color-background-val: #090D16;
+  --color-surface-val: #111827;
+  --color-surface-secondary-val: #151C2B;
+  --color-border-val: #263247;
+  --color-text-primary-val: #F8FAFC;
+  --color-text-secondary-val: #94A3B8;
+  --color-text-muted-val: #64748B;
+}
+
+
+/* *::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+} */
+
+/* Set global body color matching tokens and add smooth transition on theme toggle */
+body {
+  min-height: 100vh;
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background-color: var(--color-background-val);
+  color: var(--color-text-primary-val);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+/* 
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+#root {
+  min-height: 100vh;
+} */

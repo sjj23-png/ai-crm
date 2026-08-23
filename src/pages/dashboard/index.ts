@@ -1,0 +1,10 @@
+export { default as DashboardHome } from "./DashboardHome";
+export { default as OrganizationPage } from "./OrganizationPage";
+export { default as CompaniesPage } from "./CompaniesPage";
+export { default as ContactsPage } from "./ContactsPage";
+export { default as UsersPage } from "./UsersPage";
+export { default as RolesPage } from "./RolesPage";
+export { default as ProjectsPage } from "./ProjectsPage";
+export { default as ReportsPage } from "./ReportsPage";
+export { default as SettingsPage } from "./SettingsPage";
+export { default as CrmPage } from "./CrmPage";
