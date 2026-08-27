@@ -75,17 +75,18 @@ export default function LoginForm() {
   }
 
   return (
-    <Card className="w-full max-w-md border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-xl shadow-purple-900/5 dark:shadow-purple-950/20 rounded-2xl p-2 transition-all">
-      <CardHeader className="text-center pb-2">
-        <CardTitle className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+    <div className="w-full">
+
+      <div className="text-center pb-4">
+        <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
           Welcome Back
-        </CardTitle>
+        </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
           Sign in to your AI CRM account to manage client pipelines.
         </p>
-      </CardHeader>
+      </div>
 
-      <CardContent className="space-y-6 pt-4">
+      <div className="space-y-6 pt-2">
         {errorMsg && (
           <Alert variant="error" className="mb-4" closable onClose={() => setErrorMsg(null)}>
             {errorMsg}
@@ -100,9 +101,8 @@ export default function LoginForm() {
             type="email"
             size="lg"
             placeholder="owner@testcrm.com"
-            className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700 focus:border-purple-600 dark:focus:border-purple-500 transition-colors"
             autoComplete="email"
-            error={errors.email?.message}
+            error={errors.email?.message as string | undefined}
             {...register("email")}
           />
 
@@ -110,10 +110,7 @@ export default function LoginForm() {
             label="Password"
             autoComplete="current-password"
             placeholder="••••••••"
-            className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700 focus:border-purple-600 dark:focus:border-purple-500 transition-colors"
-            error={
-              errors.password?.message
-            }
+            error={errors.password?.message as string | undefined}
             {...register("password")}
           />
 
@@ -130,7 +127,7 @@ export default function LoginForm() {
             size="lg"
             loading={login.isPending}
             fullWidth
-            className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg shadow-purple-500/25 transition-all py-3 rounded-xl"
+            className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg shadow-purple-500/25 transition-all py-3 rounded-xl hover:scale-[1.01] active:scale-[0.99]"
           >
             Sign In
           </Button>
@@ -145,7 +142,7 @@ export default function LoginForm() {
             Create an account
           </Link>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

@@ -23,6 +23,10 @@ import { PasswordInput } from "@/design-system/components/base/PasswordInput/Pas
 import { Checkbox } from "@/design-system/components/base/Checkbox";
 import { Button } from "@/design-system/components/buttons/Button";
 
+import { AuthBackground } from "@/components/auth/AuthBackground";
+import { AuthCard } from "@/components/auth/AuthCard";
+import { DraggableOrb } from "@/components/auth/DraggableOrb";
+
 export default function RegisterPage() {
 
   const navigate = useNavigate();
@@ -109,22 +113,19 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-6 overflow-hidden transition-colors">
-      {/* Ambient background glows */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-purple-500/15 dark:bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-indigo-500/15 dark:bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
-
-      <Card className="relative z-10 w-full max-w-2xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-xl shadow-purple-900/5 dark:shadow-purple-950/20 rounded-2xl p-4 transition-all">
-        <CardHeader className="text-center pb-2">
-          <CardTitle className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
+    <AuthBackground>
+      <DraggableOrb />
+      <AuthCard className="max-w-2xl">
+        <div className="text-center pb-4">
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50">
             Create Your Organization
-          </CardTitle>
+          </h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Register your company workspace and owner account to get started.
           </p>
-        </CardHeader>
+        </div>
 
-        <CardContent className="space-y-6 pt-2">
+        <div className="space-y-6 pt-2">
           {serverError && (
             <div className="mb-5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 p-3 text-sm text-red-600 dark:text-red-400">
               {serverError}
@@ -133,108 +134,123 @@ export default function RegisterPage() {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-4"
+            className="space-y-5"
           >
-            {/* Organization */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            {/* Organization Info */}
+            <div className="space-y-4 border-b border-slate-200 dark:border-slate-800 pb-5">
+
+              <h2 className="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">
+                Organization Details
+              </h2>
+
               <Input
                 label="Organization Name"
                 placeholder="Acme Corp"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
+                required
+                error={errors.name?.message as string | undefined}
                 {...register("name")}
-                error={errors.name?.message}
               />
 
-              <Input
-                label="Organization Code"
-                placeholder="ACME"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
-                {...register("code")}
-                error={errors.code?.message}
-              />
-            </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input
-                label="Organization Email"
-                placeholder="contact@acme.com"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
-                type="email"
-                {...register("email")}
-                error={errors.email?.message}
-              />
+                <Input
+                  label="Org Code (Optional)"
+                  placeholder="ACME"
+                  error={errors.code?.message as string | undefined}
+                  {...register("code")}
+                />
 
-              <Input
-                label="Phone Number"
-                placeholder="+91 9876543210"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
-                {...register("phone")}
-                error={errors.phone?.message}
-              />
-            </div>
+                <Input
+                  label="Organization Email"
+                  placeholder="contact@acme.com"
+                  required
+                  error={errors.email?.message as string | undefined}
+                  {...register("email")}
+                />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input
-                label="Website"
-                placeholder="https://acme.com"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
-                {...register("website")}
-                error={errors.website?.message}
-              />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <Input
+                  label="Phone (Optional)"
+                  placeholder="+1234567890"
+                  error={errors.phone?.message as string | undefined}
+                  {...register("phone")}
+                />
+
+                <Input
+                  label="Website (Optional)"
+                  placeholder="https://acme.com"
+                  error={errors.website?.message as string | undefined}
+                  {...register("website")}
+                />
+
+              </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">
-                  Company Logo
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  Company Logo (Optional)
                 </label>
+
                 <input
                   type="file"
-                  className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 dark:file:bg-purple-950/60 dark:file:text-purple-300 cursor-pointer"
-                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                  accept="image/*"
                   onChange={(e) =>
                     setLogo(e.target.files?.[0])
                   }
+                  className="w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-50 dark:file:bg-purple-950/60 file:text-purple-700 dark:file:text-purple-300 hover:file:bg-purple-100 transition-all cursor-pointer"
                 />
               </div>
+
             </div>
 
-            <hr className="border-slate-200 dark:border-slate-800 my-2" />
+            {/* Owner Info */}
+            <div className="space-y-4 border-b border-slate-200 dark:border-slate-800 pb-5">
 
-            {/* Owner */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">
+                Owner Account Details
+              </h2>
+
               <Input
-                label="Owner Name"
+                label="Owner Full Name"
                 placeholder="John Doe"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
+                required
+                error={errors.ownerName?.message as string | undefined}
                 {...register("ownerName")}
-                error={errors.ownerName?.message}
               />
 
               <Input
-                label="Owner Email"
+                label="Owner Email Address"
                 placeholder="john@acme.com"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
-                type="email"
+                required
+                error={errors.ownerEmail?.message as string | undefined}
                 {...register("ownerEmail")}
-                error={errors.ownerEmail?.message}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <PasswordInput
-                label="Password"
-                placeholder="••••••••"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
-                {...register("password")}
-                error={errors.password?.message}
               />
 
-              <PasswordInput
-                label="Confirm Password"
-                placeholder="••••••••"
-                className="bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-slate-300 dark:border-slate-700"
-                {...register("confirmPassword")}
-                error={errors.confirmPassword?.message}
-              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <PasswordInput
+                  label="Password"
+                  placeholder="••••••••"
+                  required
+                  error={errors.password?.message as string | undefined}
+                  {...register("password")}
+                />
+
+                <PasswordInput
+                  label="Confirm Password"
+                  placeholder="••••••••"
+                  required
+                  error={
+                    errors.confirmPassword?.message as string | undefined
+                  }
+                  {...register("confirmPassword")}
+                />
+
+              </div>
+
             </div>
 
             <Checkbox
@@ -264,10 +280,8 @@ export default function RegisterPage() {
             </Link>
           </div>
 
-        </CardContent>
-
-      </Card>
-
-    </div>
+        </div>
+      </AuthCard>
+    </AuthBackground>
   );
 }
