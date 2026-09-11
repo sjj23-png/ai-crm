@@ -13,7 +13,7 @@ export const errorClasses =
   "text-xs text-red-500";
 
 export const baseInputClasses =
-  "w-full border bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-200 disabled:opacity-50 disabled:cursor-not-allowed";
+  "w-full border bg-white dark:bg-slate-900 border-slate-300 text-slate-900 dark:text-slate-100 dark:border-slate-700 outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
 export const sizeClasses: Record<
   InputSize,
